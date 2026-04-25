@@ -1,0 +1,100 @@
+# bedwars-ghostguard/src/main/resources/config.yml
+
+enable_scaffold: true
+enable_bednuke: true
+
+score_threshold: 75
+
+score_decay_per_second:
+  scaffold: 2.0
+  bednuke: 2.0
+
+flag_cooldown_seconds: 10
+flag_window_minutes: 8
+
+scaffold_flags_to_ban: 10
+bednuke_flags_to_kick: 10
+
+scaffold_ban_duration: "15m"
+scaffold_ban_reason: "Unfair Advantage [Scaffold]"
+
+bednuke_kick_reason: "Unfair Advantage [BedNuke]"
+
+tps_protection_enabled: true
+tps_min: 18.0
+
+ping_threshold_ms: 300
+ping_protection_enabled: true
+
+staff_permission: "anticheat.alerts"
+
+alerts:
+  prefix: "&7[&cAC&7] "
+  scaffold_title: "&cScaffold"
+  bednuke_title: "&cBedNuke"
+
+logging:
+  debug_mode: false
+  evidence_logs: true
+  log_to_console: true
+
+# ---------------- Scaffold detection tuning ----------------
+scaffold:
+  bridging_context:
+    min_horizontal_speed: 0.08  # blocks/tick-ish derived; our code uses blocks/sec, so we convert internally
+    min_repeated_places: 6
+    void_check_depth: 2
+    edge_check_radius: 1
+    pitch_down_support_deg: 65
+
+  weights:
+    cadence_constancy: 28.0
+    speed_coupling: 28.0
+    offset_clustering: 22.0
+    no_sneak_support: 8.0
+    rotation_smooth_support: 6.0
+    backwards_jump_scaffold: 24.0
+    ghost_place_spam: 35.0
+
+  cadence:
+    sample_size: 40
+    # suspicious when variance tiny and many intervals are within narrow band
+    narrow_band_ms: 35
+    narrow_band_ratio_threshold: 0.75
+    variance_ms_threshold: 900.0
+
+  speed:
+    sample_size: 30
+    stability_stddev_threshold: 0.35
+    micro_pause_ratio_threshold: 0.08 # % of samples near zero speed
+
+  offsets:
+    sample_size: 25
+    top2_ratio_threshold: 0.86
+    underfoot_ratio_threshold: 0.65
+
+  backwards:
+    dot_threshold: -0.30
+    min_chain_places: 10
+    jump_rhythm_window: 18
+    jump_place_tick_min: 1
+    jump_place_tick_max: 4
+    jump_rhythm_consistency_ratio: 0.70
+
+  ghost_place:
+    enabled: true
+    window_seconds: 12
+    attempt_success_ratio_threshold: 2.8
+    invalid_cancel_burst_threshold: 8
+
+# ---------------- BedNuke detection tuning ----------------
+bednuke:
+  max_distance: 4.6
+  aim_angle_deg: 18.0
+  invalid_window_seconds: 8
+  invalid_burst_threshold: 6
+  fast_repeat_ms_threshold: 85
+
+  mitigation:
+    enabled: true
+    cancel_when_score_ge: 80

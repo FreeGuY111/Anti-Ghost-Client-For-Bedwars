@@ -1,0 +1,17 @@
+# bedwars-ghostguard/src/main/resources/plugin.yml
+name: BedwarsGhostGuard
+main: com.yourserver.ghostguard.GhostGuardPlugin
+version: 1.0.0
+api-version: 1.13
+author: YourServer
+description: Ghost scaffold + bednuke detection for Bedwars (NMS-free, ViaVersion-friendly)
+
+softdepend:
+  - ProtocolLib
+  - LiteBans
+  - ViaVersion
+
+permissions:
+  anticheat.alerts:
+    description: Receive GhostGuard alerts
+    default: op
