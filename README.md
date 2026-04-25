@@ -1,4 +1,4 @@
-# BedwarsGhostGuard
+# FreeAGC
 
 Production-ready (NMS-free) anti-cheat plugin for Bedwars:
 - Detects ghost-client scaffold automation using **multi-signal scoring + decay**
